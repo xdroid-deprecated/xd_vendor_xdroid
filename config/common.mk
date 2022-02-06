@@ -117,6 +117,3 @@ DISABLE_EAP_PROXY := true
 # init.rc
 $(foreach f,$(wildcard vendor/xdroid/prebuilt/etc/init/*.rc),\
     $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
-
-# Include AOSP audio files
-include vendor/xdroid/config/aosp_audio.mk
