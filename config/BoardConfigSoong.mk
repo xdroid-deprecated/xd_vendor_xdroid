@@ -9,11 +9,8 @@ EXPORT_TO_SOONG := \
     KERNEL_MAKE_FLAGS \
     PATH_OVERRIDE_SOONG \
     TARGET_KERNEL_CONFIG \
-    TARGET_KERNEL_SOURCE
-
-# Setup SOONG_CONFIG_* vars to export the vars listed above.
-# Documentation here:
-# https://github.com/LineageOS/android_build_soong/commit/8328367c44085b948c003116c0ed74a047237a69
+    TARGET_KERNEL_SOURCE \
+    TARGET_KERNEL_HEADERS
 
 SOONG_CONFIG_NAMESPACES += xdroidVarsPlugin
 
@@ -42,6 +39,7 @@ SOONG_CONFIG_xdroidGlobalVars += \
     target_ld_shim_libs \
     target_process_sdk_version_override \
     target_surfaceflinger_udfps_lib \
+    target_uses_prebuilt_dynamic_partitions \
     uses_camera_parameter_lib
 
 SOONG_CONFIG_NAMESPACES += xdroidNvidiaVars
@@ -73,6 +71,7 @@ SOONG_CONFIG_xdroidGlobalVars_has_memfd_backport := $(TARGET_HAS_MEMFD_BACKPORT)
 SOONG_CONFIG_xdroidGlobalVars_ignores_ftp_pptp_conntrack_failure := $(TARGET_IGNORES_FTP_PPTP_CONNTRACK_FAILURE)
 SOONG_CONFIG_xdroidGlobalVars_needs_camera_boottime := $(TARGET_CAMERA_BOOTTIME_TIMESTAMP)
 SOONG_CONFIG_xdroidGlobalVars_needs_netd_direct_connect_rule := $(TARGET_NEEDS_NETD_DIRECT_CONNECT_RULE)
+SOONG_CONFIG_xdroidGlobalVars_target_uses_prebuilt_dynamic_partitions := $(TARGET_USES_PREBUILT_DYNAMIC_PARTITIONS)
 SOONG_CONFIG_xdroidNvidiaVars_uses_nv_enhancements := $(NV_ANDROID_FRAMEWORK_ENHANCEMENTS)
 SOONG_CONFIG_xdroidQcomVars_legacy_hw_disk_encryption := $(TARGET_LEGACY_HW_DISK_ENCRYPTION)
 SOONG_CONFIG_xdroidQcomVars_should_wait_for_qsee := $(TARGET_KEYMASTER_WAIT_FOR_QSEE)
@@ -97,7 +96,7 @@ SOONG_CONFIG_xdroidGlobalVars_bootloader_message_offset := $(BOOTLOADER_MESSAGE_
 SOONG_CONFIG_xdroidGlobalVars_target_init_vendor_lib := $(TARGET_INIT_VENDOR_LIB)
 SOONG_CONFIG_xdroidGlobalVars_target_ld_shim_libs := $(subst $(space),:,$(TARGET_LD_SHIM_LIBS))
 SOONG_CONFIG_xdroidGlobalVars_target_process_sdk_version_override := $(TARGET_PROCESS_SDK_VERSION_OVERRIDE)
-SOONG_CONFIG_xdroidGlobalVars_target_surfaceflinger_udfps_lib := $(TARGET_SURFACEFLINGER_FOD_LIB)
+SOONG_CONFIG_xdroidGlobalVars_target_surfaceflinger_udfps_lib := $(TARGET_SURFACEFLINGER_UDFPS_LIB)
 SOONG_CONFIG_xdroidGlobalVars_uses_camera_parameter_lib := $(TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY)
 SOONG_CONFIG_xdroidGlobalVars_target_inputdispatcher_skip_event_key := $(TARGET_INPUTDISPATCHER_SKIP_EVENT_KEY)
 
@@ -110,3 +109,7 @@ endif
 ifneq ($(TARGET_USE_QTI_BT_STACK),true)
 PRODUCT_SOONG_NAMESPACES += packages/apps/Bluetooth
 endif #TARGET_USE_QTI_BT_STACK
+
+ifneq ($(TARGET_USES_NQ_NFC),true)
+PRODUCT_SOONG_NAMESPACES += hardware/nxp
+endif #TARGET_USES_NQ_NFC

@@ -1,4 +1,5 @@
 # Copyright (C) 2018-2020 The LineageOS Project
+#           (C) 2018-2020 The PixelExperience Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -41,9 +42,6 @@ BUILD_TOP := $(shell pwd)
 
 TARGET_AUTO_KDIR := $(shell echo $(TARGET_DEVICE_DIR) | sed -e 's/^device/kernel/g')
 TARGET_KERNEL_SOURCE ?= $(TARGET_AUTO_KDIR)
-ifneq ($(TARGET_PREBUILT_KERNEL),)
-TARGET_KERNEL_SOURCE :=
-endif
 
 TARGET_KERNEL_ARCH := $(strip $(TARGET_KERNEL_ARCH))
 ifeq ($(TARGET_KERNEL_ARCH),)
@@ -52,17 +50,33 @@ else
 KERNEL_ARCH := $(TARGET_KERNEL_ARCH)
 endif
 
+TARGET_KERNEL_HEADERS ?= $(TARGET_KERNEL_SOURCE)
+
 CLANG_PREBUILTS := $(BUILD_TOP)/prebuilts/clang/host/$(HOST_PREBUILT_TAG)/clang-r416183b1
 GCC_PREBUILTS := $(BUILD_TOP)/prebuilts/gcc/$(HOST_PREBUILT_TAG)
-# arm64 toolchain
-KERNEL_TOOLCHAIN_arm64 := $(GCC_PREBUILTS)/aarch64/aarch64-linux-android-4.9/bin
-KERNEL_TOOLCHAIN_PREFIX_arm64 := aarch64-linux-android-
-# arm toolchain
-KERNEL_TOOLCHAIN_arm := $(GCC_PREBUILTS)/arm/arm-linux-androideabi-4.9/bin
-KERNEL_TOOLCHAIN_PREFIX_arm := arm-linux-androidkernel-
+
 # x86 toolchain
 KERNEL_TOOLCHAIN_x86 := $(GCC_PREBUILTS)/x86/x86_64-linux-android-4.9/bin
 KERNEL_TOOLCHAIN_PREFIX_x86 := x86_64-linux-android-
+
+ifeq ($(TARGET_KERNEL_NEW_GCC_COMPILE),true)
+    ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
+        $(error TARGET_KERNEL_NEW_GCC_COMPILE cannot be used with TARGET_KERNEL_CLANG_COMPILE!)
+    endif
+    # arm64 toolchain
+    KERNEL_TOOLCHAIN_arm64 := $(GCC_PREBUILTS)/aarch64/aarch64-elf/bin
+    KERNEL_TOOLCHAIN_PREFIX_arm64 := aarch64-elf-
+    # arm toolchain
+    KERNEL_TOOLCHAIN_arm := $(GCC_PREBUILTS)/arm/arm-eabi/bin
+    KERNEL_TOOLCHAIN_PREFIX_arm := arm-eabi-
+else
+    # arm64 toolchain
+    KERNEL_TOOLCHAIN_arm64 := $(GCC_PREBUILTS)/aarch64/aarch64-linux-android-4.9/bin
+    KERNEL_TOOLCHAIN_PREFIX_arm64 := aarch64-linux-android-
+    # arm toolchain
+    KERNEL_TOOLCHAIN_arm := $(GCC_PREBUILTS)/arm/arm-linux-androideabi-4.9/bin
+    KERNEL_TOOLCHAIN_PREFIX_arm := arm-linux-androidkernel-
+endif
 
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(strip $(TARGET_KERNEL_CROSS_COMPILE_PREFIX))
 ifneq ($(TARGET_KERNEL_CROSS_COMPILE_PREFIX),)
@@ -98,6 +112,7 @@ endif
 # Needed for CONFIG_COMPAT_VDSO, safe to set for all arm64 builds
 ifeq ($(KERNEL_ARCH),arm64)
    KERNEL_CROSS_COMPILE += CROSS_COMPILE_ARM32="$(KERNEL_TOOLCHAIN_arm)/$(KERNEL_TOOLCHAIN_PREFIX_arm)"
+   KERNEL_CROSS_COMPILE += CROSS_COMPILE_COMPAT="$(KERNEL_TOOLCHAIN_arm)/$(KERNEL_TOOLCHAIN_PREFIX_arm)"
 endif
 
 # Clear this first to prevent accidental poisoning from env
@@ -127,9 +142,15 @@ ifneq ($(TARGET_KERNEL_ADDITIONAL_FLAGS),)
 endif
 
 TOOLS_PATH_OVERRIDE := \
-    PATH=$(BUILD_TOP)/prebuilts/tools-xdroid/$(HOST_PREBUILT_TAG)/bin:$$PATH \
     LD_LIBRARY_PATH=$(BUILD_TOP)/prebuilts/tools-xdroid/$(HOST_PREBUILT_TAG)/lib:$$LD_LIBRARY_PATH \
     PERL5LIB=$(BUILD_TOP)/prebuilts/tools-xdroid/common/perl-base
+
+ifeq ($(KERNEL_ARCH),arm64)
+  # Add 32-bit GCC to PATH so that arm-linux-androidkernel-as is available for CONFIG_COMPAT_VDSO
+  TOOLS_PATH_OVERRIDE += PATH=$(BUILD_TOP)/prebuilts/tools-xdroid/$(HOST_PREBUILT_TAG)/bin:$(KERNEL_TOOLCHAIN_arm):$$PATH
+else
+  TOOLS_PATH_OVERRIDE += PATH=$(BUILD_TOP)/prebuilts/tools-xdroid/$(HOST_PREBUILT_TAG)/bin:$$PATH
+endif
 
 # Set DTBO image locations so the build system knows to build them
 ifeq (true,$(filter true, $(TARGET_NEEDS_DTBOIMAGE) $(BOARD_KERNEL_SEPARATED_DTBO)))

@@ -21,18 +21,19 @@ xdroid_generator {
     name: "generated_kernel_includes",
 
     // The headers make command
-    cmd: "$(PATH_OVERRIDE_SOONG) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(TARGET_KERNEL_SOURCE) O=$(KERNEL_BUILD_OUT_PREFIX)$(genDir) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) headers_install",
+    cmd: "$(PATH_OVERRIDE_SOONG) $(KERNEL_MAKE_CMD) $(KERNEL_MAKE_FLAGS) -C $(TARGET_KERNEL_HEADERS) O=$(KERNEL_BUILD_OUT_PREFIX)$(genDir) ARCH=$(KERNEL_ARCH) $(KERNEL_CROSS_COMPILE) headers_install",
 
     // Directories that can be imported by a cc_* module generated_headers property
     export_include_dirs: [
         "usr/audio/include/uapi",
         "usr/include",
+        "usr/include/audio",
         "usr/include/audio/include/uapi",
         "usr/techpack/audio/include",
     ],
 
     // Sources for dependency tracking
-    dep_root: "$(TARGET_KERNEL_SOURCE)",
+    dep_root: "$(TARGET_KERNEL_HEADERS)",
     dep_files: [
         "Makefile",
         "include/**/*",
@@ -169,6 +170,23 @@ surfaceflinger_udfps_lib {
         target_surfaceflinger_udfps_lib: {
             cppflags: ["-DTARGET_PROVIDES_UDFPS_LIB"],
             whole_static_libs: ["%s"],
+        },
+    },
+}
+
+soong_config_module_type {
+    name: "target_uses_prebuilt_dynamic_partitions",
+    module_type: "cc_defaults",
+    config_namespace: "xdroidGlobalVars",
+    bool_variables: ["target_uses_prebuilt_dynamic_partitions"],
+    properties: ["cppflags"],
+}
+
+target_uses_prebuilt_dynamic_partitions {
+    name: "target_uses_prebuilt_dynamic_partitions_defaults",
+    soong_config_variables: {
+        target_uses_prebuilt_dynamic_partitions: {
+            cppflags: ["-DTARGET_USES_PREBUILT_DYNAMIC_PARTITIONS"],
         },
     },
 }
@@ -390,7 +408,6 @@ soong_config_module_type {
     properties: [
         "cppflags",
         "shared_libs",
-        "export_shared_lib_headers",
     ],
 }
 
@@ -400,7 +417,6 @@ qti_camera_device {
         uses_qti_camera_device: {
             cppflags: ["-DQTI_CAMERA_DEVICE"],
             shared_libs: ["vendor.qti.hardware.camera.device@1.0"],
-            export_shared_lib_headers: ["vendor.qti.hardware.camera.device@1.0"],
         },
     },
 }

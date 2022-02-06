@@ -1,5 +1,5 @@
-# Copyright (C) 2020 The ConquerOS Project
-# Copyright (C) 2021 a xdroid Prjkt
+#
+# Copyright (C) 2022 a xdroid Prjkt
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
