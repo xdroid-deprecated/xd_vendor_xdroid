@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-XDROID_TARGET_PACKAGE := $(PRODUCT_OUT)/$(XDROID_BUILD_VERSION).zip
+XDROID_TARGET_PACKAGE := $(PRODUCT_OUT)/$(XDROID_REVISION).zip
 MD5 := prebuilts/build-tools/path/$(HOST_OS)-x86/md5sum
 
 .PHONY: xd
