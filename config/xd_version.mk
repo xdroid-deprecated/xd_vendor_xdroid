@@ -25,6 +25,14 @@ ifndef XDROID_BUILD_TYPE
    XDROID_BUILD_TYPE := DVLPMNT
 endif
 
+ifdef XDROID_MAINTAINER
+   $(warning "xdroid: Detected Official Build, goodluck and wish have zero bugs.")
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+   ro.xdroid.maintainer=$(XDROID_MAINTAINER)
+else
+   $(warning "xdroidUI: Detected Unofficial Build.")
+endif
+
 XDROID_VERSION := r2
 XDROID_ANDROID := 12.0
 XDROID_REVISION := INA.XD.$(XDROID_ANDROID).$(XDROID_VERSION)-$(XDROID_GENID)-$(XDROID_BUILD).$(XDROID_BUILD_TYPE)
