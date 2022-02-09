@@ -1,6 +1,6 @@
 #
 # Copyright (C) 2020 The ConquerOS Project
-#				2021 a xdroid Prjkt
+#				(C) 2021-2022 The xdroidOSS && Prjkt
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,14 +23,6 @@ XDROID_GENID := $(shell date -u +%M%d%m)
 
 ifndef XDROID_BUILD_TYPE
    XDROID_BUILD_TYPE := DVLPMNT
-endif
-
-ifdef XDROID_MAINTAINER
-   $(warning "xdroid: Detected Official Build, goodluck and wish have zero bugs.")
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-   ro.xdroid.maintainer=$(XDROID_MAINTAINER)
-else
-   $(warning "xdroidUI: Detected Unofficial Build.")
 endif
 
 XDROID_VERSION := r2

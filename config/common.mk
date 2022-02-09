@@ -30,6 +30,9 @@ PRODUCT_COPY_FILES += \
     vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/xd_permissions_system-ext.xml \
     vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/xd_permissions_product.xml
 
+# xd. signed
+include vendor/xdroid/config/xd_signed.mk
+
 # xd. xdroidUI
 include vendor/xdroidui/config.mk
 
