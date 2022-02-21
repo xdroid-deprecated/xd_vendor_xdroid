@@ -2,6 +2,6 @@ export AOSP_REVISION=$(grep "default revision" ".repo/manifests/default.xml" | a
 
 # Welcome Msg
 echo -e ==========================================
-echo 	 xd. xdroidOS Build Environtment
+echo 	 xd. xdroidOS Build Environment
 echo -e ==========================================
 echo -e "AOSP Revision: $AOSP_REVISION"
