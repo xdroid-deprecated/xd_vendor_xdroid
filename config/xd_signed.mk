@@ -19,6 +19,7 @@ OFFICIAL_MAINTAINER = $(shell cat official-maintainer/maintainers.list | awk '{ 
 ifdef XDROID_MAINTAINER
 ifeq ($(filter $(XDROID_MAINTAINER), $(OFFICIAL_MAINTAINER)), $(XDROID_MAINTAINER))
 $(warning "xdroid: $(XDROID_MAINTAINER) is verified as official maintainer, build as official build.")
+    XDROID_OFFICIAL = true
     include official-settings/sign.mk
 else
 $(warning "xdroid: Unofficial maintainer detected, building as unofficial build.")
