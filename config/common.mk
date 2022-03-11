@@ -43,6 +43,10 @@ TARGET_INCLUDE_STOCK_ARCORE ?= false
 TARGET_INCLUDE_LIVE_WALLPAPERS ?= false
 TARGET_SUPPORTS_QUICK_TAP ?= true
 
+# xd. APEX
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+$(call inherit-product, vendor/xdroid/config/xd_apex.mk)
+
 # ART
 # Optimize everything for preopt
 PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := everything
