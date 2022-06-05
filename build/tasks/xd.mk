@@ -13,7 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+ifeq ($(XDROID_OFFICIAL),true)
+XDROID_TARGET_PACKAGE := $(PRODUCT_OUT)/$(XDROID_REVISION)_SIGNED.zip
+else
 XDROID_TARGET_PACKAGE := $(PRODUCT_OUT)/$(XDROID_REVISION).zip
+endif
 MD5 := prebuilts/build-tools/path/$(HOST_OS)-x86/md5sum
 
 .PHONY: xd
