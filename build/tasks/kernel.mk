@@ -254,22 +254,6 @@ ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
         KERNEL_STRIP :=
     endif
 
-    # As 
-    ifeq ($(KERNEL_SUPPORTS_LLVM_TOOLS),true)
-        KERNEL_LD := LD=ld.lld
-        KERNEL_AR := AR=llvm-ar
-        KERNEL_OBJCOPY := OBJCOPY=llvm-objcopy
-        KERNEL_OBJDUMP := OBJDUMP=llvm-objdump
-        KERNEL_NM := NM=llvm-nm
-        KERNEL_STRIP := STRIP=llvm-strip
-    else
-        KERNEL_LD :=
-        KERNEL_AR :=
-        KERNEL_OBJCOPY :=
-        KERNEL_OBJDUMP :=
-        KERNEL_NM :=
-        KERNEL_STRIP :=
-    endif
     TARGET_KERNEL_CLANG_PATH ?= $(BUILD_TOP)/prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(KERNEL_CLANG_VERSION)
     ifeq ($(KERNEL_ARCH),arm64)
         KERNEL_CLANG_TRIPLE ?= CLANG_TRIPLE=aarch64-linux-gnu-
@@ -285,6 +269,24 @@ ifeq ($(TARGET_KERNEL_CLANG_COMPILE),true)
     ifeq ($(KERNEL_LD),)
         KERNEL_LD :=
     endif
+endif
+
+# As
+ifeq ($(KERNEL_SUPPORTS_LLVM_TOOLS),true)
+    LLVM_TOOLS ?= $(TARGET_KERNEL_CLANG_PATH)/bin
+    KERNEL_LD := LD=$(LLVM_TOOLS)/ld.lld
+    KERNEL_AR := AR=$(LLVM_TOOLS)/llvm-ar
+    KERNEL_OBJCOPY := OBJCOPY=$(LLVM_TOOLS)/llvm-objcopy
+    KERNEL_OBJDUMP := OBJDUMP=$(LLVM_TOOLS)/llvm-objdump
+    KERNEL_NM := NM=$(LLVM_TOOLS)/llvm-nm
+    KERNEL_STRIP := STRIP=$(LLVM_TOOLS)/llvm-strip
+else
+    KERNEL_LD :=
+    KERNEL_AR :=
+    KERNEL_OBJCOPY :=
+    KERNEL_OBJDUMP :=
+    KERNEL_NM :=
+    KERNEL_STRIP :=
 endif
 
 ifneq ($(TARGET_KERNEL_MODULES),)
