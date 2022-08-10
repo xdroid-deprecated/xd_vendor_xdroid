@@ -499,10 +499,7 @@ else
 	$(MKDTBOIMG) create $@ --page_size=$(BOARD_KERNEL_PAGESIZE) $(shell find $(DTBO_OUT)/arch/$(KERNEL_ARCH)/boot/dts -type f -name "*.dtbo" | sort)
 endif
 else
-$(BOARD_PREBUILT_DTBOIMAGE):
-	@echo "Building dtbo.img"
-	$(call make-dtbo-target,$(KERNEL_DEFCONFIG))
-	$(call make-dtbo-target,dtbo.img)
+	$(call make-dtbo-target,$(TARGET_KERNEL_DTBO))
 endif # BOARD_KERNEL_SEPARATED_DTBO
 endif # BOARD_CUSTOM_DTBOIMG_MK
 endif # TARGET_NEEDS_DTBOIMAGE/BOARD_KERNEL_SEPARATED_DTBO
