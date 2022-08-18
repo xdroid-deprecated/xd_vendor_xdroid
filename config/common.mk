@@ -37,11 +37,11 @@ include vendor/xdroid/config/xd_signed.mk
 include vendor/xdroidui/config.mk
 
 # xd. GMS
-# include vendor/google/gms/config.mk
-# TARGET_SUPPORTS_GOOGLE_RECORDER ?= false
-# TARGET_INCLUDE_STOCK_ARCORE ?= false
-# TARGET_INCLUDE_LIVE_WALLPAPERS ?= false
-# TARGET_SUPPORTS_QUICK_TAP ?= true
+$(call inherit-product, vendor/gms/gms_mini.mk)
+TARGET_SUPPORTS_GOOGLE_RECORDER ?= false
+TARGET_INCLUDE_STOCK_ARCORE ?= false
+TARGET_INCLUDE_LIVE_WALLPAPERS ?= false
+TARGET_SUPPORTS_QUICK_TAP ?= true
 
 # ART
 # Optimize everything for preopt
