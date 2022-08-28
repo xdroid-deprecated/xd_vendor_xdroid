@@ -139,6 +139,9 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/xdroid/overlay/dictionaries
 # and breaks WPA Supplicant compilation.
 DISABLE_EAP_PROXY := true
 
+# Pixel Framework
+$(call inherit-product, vendor/xdroid-pixel/config.mk)
+
 # init.rc
 $(foreach f,$(wildcard vendor/xdroid/prebuilt/etc/init/*.rc),\
     $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
