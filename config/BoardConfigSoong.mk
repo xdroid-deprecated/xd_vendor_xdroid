@@ -29,7 +29,6 @@ SOONG_CONFIG_xdroidGlobalVars += \
     camera_needs_client_info \
     disable_bluetooth_le_read_buffer_size_v2 \
     disable_bluetooth_le_set_host_feature \
-    has_legacy_camera_hal1 \
     gralloc_handle_has_reserved_size \
     needs_camera_boottime \
     target_init_vendor_lib \
@@ -59,7 +58,6 @@ endif
 
 # Soong bool variables
 SOONG_CONFIG_xdroidGlobalVars_camera_needs_client_info := $(TARGET_CAMERA_NEEDS_CLIENT_INFO)
-SOONG_CONFIG_xdroidGlobalVars_has_legacy_camera_hal1 := $(TARGET_HAS_LEGACY_CAMERA_HAL1)
 SOONG_CONFIG_xdroidGlobalVars_needs_camera_boottime := $(TARGET_CAMERA_BOOTTIME_TIMESTAMP)
 SOONG_CONFIG_xdroidGlobalVars_target_uses_prebuilt_dynamic_partitions := $(TARGET_USES_PREBUILT_DYNAMIC_PARTITIONS)
 SOONG_CONFIG_xdroidGlobalVars_uses_legacy_fd_fbdev := $(TARGET_USES_LEGACY_FD_FBDEV)
