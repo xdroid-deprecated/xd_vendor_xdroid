@@ -121,6 +121,10 @@ PRODUCT_PACKAGES += \
 	libtextclassifier_annotator_universal_model \
 	libtextclassifier_actions_suggestions_universal_model \
 	libtextclassifier_lang_id_model
+    
+# Enable whole-program R8 Java optimizations for SystemUI and system_server
+SYSTEM_OPTIMIZE_JAVA := true
+SYSTEMUI_OPTIMIZE_JAVA := true
 
 # Use default filter for problematic apps.
 PRODUCT_DEXPREOPT_QUICKEN_APPS += \
