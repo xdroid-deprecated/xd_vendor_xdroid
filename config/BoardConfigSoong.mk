@@ -32,7 +32,6 @@ SOONG_CONFIG_xdroidGlobalVars += \
     has_legacy_camera_hal1 \
     has_memfd_backport \
     ignores_ftp_pptp_conntrack_failure \
-    camera_needs_client_info_lib \
     gralloc_handle_has_reserved_size \
     needs_camera_boottime \
     needs_netd_direct_connect_rule \
