@@ -29,6 +29,8 @@ SOONG_CONFIG_xdroidGlobalVars += \
     bootloader_message_offset \
     camera_needs_client_info \
     disable_postrender_cleanup \
+    disable_bluetooth_le_read_buffer_size_v2 \
+    disable_bluetooth_le_set_host_feature \
     has_legacy_camera_hal1 \
     has_memfd_backport \
     ignores_ftp_pptp_conntrack_failure \
@@ -103,6 +105,8 @@ TARGET_TRUST_USB_CONTROL_DISABLE ?= 0
 
 # Soong value variables
 SOONG_CONFIG_xdroidGlobalVars_additional_gralloc_10_usage_bits := $(TARGET_ADDITIONAL_GRALLOC_10_USAGE_BITS)
+SOONG_CONFIG_xdroidGlobalVars_disable_bluetooth_le_read_buffer_size_v2 := $(TARGET_DISABLE_BLUETOOTH_LE_READ_BUFFER_SIZE_V2)
+SOONG_CONFIG_xdroidGlobalVars_disable_bluetooth_le_set_host_feature := $(TARGET_DISABLE_BLUETOOTH_LE_SET_HOST_FEATURE)
 SOONG_CONFIG_xdroidGlobalVars_bootloader_message_offset := $(BOOTLOADER_MESSAGE_OFFSET)
 SOONG_CONFIG_xdroidGlobalVars_target_init_vendor_lib := $(TARGET_INIT_VENDOR_LIB)
 SOONG_CONFIG_xdroidGlobalVars_target_ld_shim_libs := $(subst $(space),:,$(TARGET_LD_SHIM_LIBS))
