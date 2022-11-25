@@ -70,6 +70,10 @@ endif
 PRODUCT_COPY_FILES += \
     vendor/xdroid/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
 
+# BtHelper
+PRODUCT_PACKAGES += \
+    BtHelper
+
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED ?= true
 ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
