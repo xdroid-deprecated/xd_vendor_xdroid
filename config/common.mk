@@ -115,6 +115,13 @@ DEVICE_PACKAGE_OVERLAYS += vendor/xdroid/overlay/common
 PRODUCT_COPY_FILES += \
     vendor/xdroid/prebuilt/common/etc/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
 
+# TextClassifier
+PRODUCT_PACKAGES += \
+	libtextclassifier_annotator_en_model \
+	libtextclassifier_annotator_universal_model \
+	libtextclassifier_actions_suggestions_universal_model \
+	libtextclassifier_lang_id_model
+
 # Use default filter for problematic apps.
 PRODUCT_DEXPREOPT_QUICKEN_APPS += \
     Dialer
