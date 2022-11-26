@@ -34,6 +34,7 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
    ro.aosp.revision=$(AOSP_REVISION) \
    ro.xdroid.platform_release_or_codename=$(XDROID_PLATFORM_RELEASE_OR_CODENAME) \
    ro.xdroid.revision=$(XDROID_REVISION) \
+   ro.xdroid.fullver=$(XDROID_ANDROID).$(XDROID_VERSION) \
    ro.xdroid.build.security_patch=$(XDROID_SECURITY_PATCH) \
    ro.xdroid.build.number=$(XDROID_BUILD_NUMBER) \
    ro.build.datetime=$(XDROID_BUILD_DATE_TIME)
