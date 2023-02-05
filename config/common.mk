@@ -37,7 +37,7 @@ include vendor/xdroid/config/xd_signed.mk
 include vendor/xdroidui/config.mk
 
 # xd. GMS
-$(call inherit-product, vendor/gapps/config.mk)
+$(call inherit-product, vendor/gms/config.mk)
 TARGET_SUPPORTS_GOOGLE_RECORDER ?= false
 TARGET_INCLUDE_STOCK_ARCORE ?= true
 TARGET_INCLUDE_LIVE_WALLPAPERS ?= false
