@@ -234,7 +234,7 @@ PRODUCT_PACKAGES += \
     CustomFontPixelLauncherOverlay \
     DocumentsUIOverlay \
     NetworkStackOverlay \
-    ThemedIconsOverlay \
+    PixelLauncherOverlay \
     NavigationBarNoHintOverlay
 
 # TextClassifier
