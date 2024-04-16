@@ -1,0 +1,34 @@
+#
+# Copyright (C) 2024 xdroidOSS
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+XDROID_HOST_TIME := $(shell date +"%Y%m%d-%H%M")
+XDROID_BUILD_DATE := $(shell date -u +%d%m%Y)
+XDROID_BUILD_TIME := $(shell date -u +%H%M)
+XDROID_BUILD_DATE_TIME := $(XDROID_BUILD_DATE)$(XDROID_BUILD_TIME)
+
+ifdef XDROID_KEEPER
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+   org.xdroid.keeper=$(XDROID_KEEPER)
+endif
+
+ifndef XDROID_BUILD_TYPE
+   XDROID_BUILD_TYPE := REL
+endif
+
+XDROID_VERSION := 31
+XDROID_ANDROID := 14.0
+XDROID_PLATFORM_RELEASE_OR_CODENAME := DEBUG
+XDROID_REVISION := INA.XD.$(XDROID_ANDROID).$(XDROID_VERSION)-$(XDROID_BUILD)-$(XDROID_BUILD_DATE)-$(XDROID_BUILD_TIME)-$(XDROID_BUILD_TYPE)
+XDROID_BUILD_NUMBER := XD.r$(XDROID_VERSION).$(XDROID_HOST_TIME)
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+   ro.aosp.revision=$(AOSP_REVISION) \
+   ro.xdroid.platform_release_or_codename=$(XDROID_PLATFORM_RELEASE_OR_CODENAME) \
+   ro.xdroid.revision=$(XDROID_REVISION) \
+   ro.xdroid.fullver=$(XDROID_ANDROID).$(XDROID_VERSION) \
+   ro.xdroid.build.security_patch=$(XDROID_SECURITY_PATCH) \
+   ro.xdroid.build.number=$(XDROID_BUILD_NUMBER) \
+   ro.build.datetime=$(XDROID_BUILD_DATE_TIME)
