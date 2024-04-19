@@ -49,6 +49,9 @@ PRODUCT_COPY_FILES += \
 # Face Unlock
 TARGET_FACE_UNLOCK_SUPPORTED := false
 
+# Google Service
+$(call inherit-product, vendor/gms/products/gms.mk)
+
 ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
 PRODUCT_PACKAGES += \
     ParanoidSense
