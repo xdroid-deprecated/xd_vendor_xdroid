@@ -46,11 +46,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:$(TARGET_COPY_OUT_PRODUCT)/usr/keylayout/Vendor_045e_Product_0719.kl
 
-# Face Unlock
-TARGET_FACE_UNLOCK_SUPPORTED := false
-
 # Google Service
 $(call inherit-product, vendor/gms/products/gms.mk)
+
+# Face Unlock
+TARGET_FACE_UNLOCK_SUPPORTED := false
 
 ifeq ($(TARGET_FACE_UNLOCK_SUPPORTED),true)
 PRODUCT_PACKAGES += \
@@ -63,11 +63,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 endif
 
-# Google Photos Pixel Exclusive XML
-PRODUCT_COPY_FILES += \
-    vendor/xdroid/prebuilt/common/etc/sysconfig/pixel_2016_exclusive.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/pixel_2016_exclusive.xml
-
-# Lineage-specific file
 PRODUCT_COPY_FILES += \
     vendor/xdroid/config/permissions/privapp-permissions-lineagehw.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-lineagehw.xml
 

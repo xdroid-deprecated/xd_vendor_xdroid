@@ -63,6 +63,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     rsync
 
+# Aperture Camera
+ifneq ($(PRODUCT_NO_CAMERA),true)
+PRODUCT_PACKAGES += \
+    Aperture
+endif
+
 # TouchGestures
 PRODUCT_PACKAGES += \
     TouchGestures
@@ -88,10 +94,10 @@ endif
 
 # Overlays
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    vendor/xdroid/overlay
+    vendor/xdroid/ui/overlay
 
 PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/xdroid/overlay/common
+    vendor/xdroid/ui/overlay/common
 
 PRODUCT_PACKAGES += \
     AndroidBlackThemeOverlay \
