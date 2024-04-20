@@ -92,21 +92,6 @@ PRODUCT_PACKAGES += \
 endif
 endif
 
-# Overlays
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    vendor/xdroid/ui/overlay
-
-PRODUCT_PACKAGE_OVERLAYS += \
-    vendor/xdroid/ui/overlay/common
-
-PRODUCT_PACKAGES += \
-    AndroidBlackThemeOverlay \
-    CustomFontPixelLauncherOverlay \
-    DocumentsUIOverlay \
-    NetworkStackOverlay \
-    ThemedIconsOverlay \
-    NavigationBarNoHintOverlay
-
 # TextClassifier
 PRODUCT_PACKAGES += \
     libtextclassifier_annotator_en_model \

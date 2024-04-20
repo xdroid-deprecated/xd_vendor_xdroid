@@ -89,12 +89,12 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     dalvik.vm.systemuicompilerfilter=speed
 
-include vendor/xdroid/config/xd_boot.mk
-include vendor/xdroid/config/xd_fonts.mk
+-include $(WORKSPACE)/build_env/image-auto-bits.mk
+
 include vendor/xdroid/config/xd_packages.mk
 include vendor/xdroid/config/xd_props.mk
 include vendor/xdroid/config/xd_signed.mk
 include vendor/xdroid/config/xd_telephony.mk
 include vendor/xdroid/config/xd_version.mk
+include vendor/xdroidui/xd_ui.mk
 
--include $(WORKSPACE)/build_env/image-auto-bits.mk
